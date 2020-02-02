@@ -1,0 +1,68 @@
+Given an array arr of N integers. Find the contiguous sub-array with maximum sum.
+
+Input:
+The first line of input contains an integer T denoting the number of test cases. The description of T test cases follows. The first line of each test case contains a single integer N denoting the size of array. The second line contains N space-separated integers A1, A2, ..., AN denoting the elements of the array.
+
+Output:
+Print the maximum sum of the contiguous sub-array in a separate line for each test case.
+
+Constraints:
+1 ≤ T ≤ 110
+1 ≤ N ≤ 106
+-107 ≤ A[i] <= 107
+
+Example:
+Input
+2
+5
+1 2 3 -2 5
+4
+-1 -2 -3 -4
+Output
+9
+-1
+
+Explanation:
+Testcase 1: Max subarray sum is 9 of elements (1, 2, 3, -2, 5) which is a contiguous subarray.
+
+******************************************Code************************
+#include<algorithm>
+#include<iostream>
+#include<bits/stdc++.h>
+#include<cmath>
+using namespace std;
+
+int kadanesAlgorithm(int arr[],int n)
+{
+  int max_so_far=0,max_ending_here=INT_MIN;
+  for(int i=0;i<n;i++)
+  {
+    max_so_far+=arr[i];
+    if(max_so_far>max_ending_here)
+    {
+      max_ending_here=max_so_far;
+    }
+    if(max_so_far<0)
+    {
+      max_so_far=0;
+    }
+  }
+  return max_ending_here;
+}
+int main()
+{
+  int test;
+  std::cin>>test;
+  while(test--)
+  {
+    int n;
+    std::cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+      std::cin>>arr[i];
+    }
+    std::cout<<kadanesAlgorithm(arr,n)<<endl;
+  }
+  return 0;
+}
